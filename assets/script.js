@@ -19,19 +19,22 @@ var formSubmitHandler = function(event) {
         alert('Please enter a city name');
     }
 };
+
+//lat and lon for city searched
 var getCityCoordinates = function(city) {
     var apiUrl= 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=d8a50e839877cad08e505ca47a0dd3aa'
     fetch (apiUrl)
     .then(function(response) {
         if(response.ok) {
             response.json().then(function(data) {
-                getCityConditions (data[0].lat, data[0].lon)
+                getCityConditions (data[0].lat, data[0].lon, city)
             })
         }
     })
 }
 
-var getCityConditions = function (latitute, longitude) {
+//passing lat and lon of searched city to get the conditions
+var getCityConditions = function (latitute, longitude, city) {
     //format the weather api url
     var apiUrl= 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitute + '&lon=' + longitude + '&appid=d8a50e839877cad08e505ca47a0dd3aa&exlude=hourly,daily,alerts&units=imperial';
 
@@ -42,7 +45,7 @@ var getCityConditions = function (latitute, longitude) {
         if (response.ok) {
             response.json().then(function(data) {
                 console.log(data);
-                displayConditions(data.current, data.daily);
+                displayConditions(data.current, data.daily, city);
             });
         } else {
             alert('Error: ' + response.statusText);
@@ -53,10 +56,10 @@ var getCityConditions = function (latitute, longitude) {
     });
 };
 
-var displayConditions = function(current, forecast) {
+var displayConditions = function(current, forecast, city) {
     
     console.log(current, forecast)
-
+//format for UV conditions
     let currentUviColor = 'green';
 
     if (current.uvi > 2) {
@@ -67,8 +70,15 @@ var displayConditions = function(current, forecast) {
         currentUviColor = 'red';
     }
 
+//format for the current day 
+var currentDay= moment.unix(current.dt).format("MM/D/YYYY")
+var currentDayIcon= "http://openweathermap.org/img/wn/"+ current.weather[0].icon  +"@2x.png"
+
+
     currentCondEl.innerHTML=`
     <div class="">
+        <div> ${city} ${currentDay}</div>
+        <img src="${currentDayIcon}" />
         <div>Temperature: ${current.temp}</div>
         <div>Wind: ${current.wind_speed}</div>
         <div>Humidity: ${current.humidity}</div>
