@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   <link rel="stylesheet" href="./assets/style.css" />
@@ -13,32 +14,54 @@
 
 <body class="flex-column min-100-vh">
     <header class="hero">
-      <h1 class="app-title"><i class=""></i> Weather Dashboard</h1>
+      
     </header>
 
     <main class="flex-row justify-space-between">
         <div class="col-12 col-md-4">
           <div class="card">
-            <h3 class="card-header text-uppercase">Search for a city</h3>
-            <form id="city-form" class="card-body">
-              <label class="form-label" for="cityName">City Name</label>
-              <input name="cityName" id="cityName" type="text" autofocus="true" class="form-input" />
-              <button type="submit" class="btn">Search</button>
-            </form>
           </div>
         </div>
         <div class="col-12 col-md-8">
             <!--HOW TO ADD SPECIFIC CITY??-->
-            <h2 class="subtitle"> <span id="city-searched"></span></h2>
-            <div id="current-conditions" class="list-group"></div>
+            
           </div>
         <div class="col-12 col-md-8">
-            <h2 class="subtitle">5 Day Forecast <span id="city-searched"></span></h2>
-         <div id="fiveday" class="list-group"></div>
+            
         </div>
+
+
+        <div class="container">
+          <h1 class="app-title"><i class=""></i> Weather Dashboard</h1>
+          <div class="row">
+            <div class="col-3">
+              <h3 class="card-header text-uppercase">Search for a city</h3>
+              <form id="city-form" class="card-body">
+                <label class="form-label" for="cityName">City Name</label>
+                <input name="cityName" id="cityName" type="text" autofocus="true" class="form-input" />
+                <button type="submit" class="btn">Search</button>
+              </form>
+            </div>
+            <div class="col-9">
+              <h2 class="subtitle"> <span id="city-searched"></span></h2>
+              
+              <div class="card">
+                <div class="card-body" id="current-conditions">
+                </div>
+              </div>
+              <h2 class="subtitle">5 Day Forecast <span id="city-searched"></span></h2>
+              <div id="fiveday" class="list-group"></div>
+            </div>
+          </div>
+        </div>
+        
 
 </main>
   <!--add script at the bottom of the body-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./assets/script.js"></script>
 </body>
 
