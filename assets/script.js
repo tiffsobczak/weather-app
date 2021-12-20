@@ -109,7 +109,7 @@ var displayConditions = function(current, forecast, city) {
         const day = forecast[i];
         const dayEl=document.createElement('div')
         var date=moment.unix(day.dt).format("MM/D/YYYY")
-        var forecastIcon= "http://openweathermap.org/img/wn/" + forecast[i].weather[0].icon +"@2x.png"
+        var forecastIcon= "https://openweathermap.org/img/wn/" + forecast[i].weather[0].icon +"@2x.png"
 
         dayEl.innerHTML = `
         <div class="">
@@ -127,7 +127,7 @@ var displayConditions = function(current, forecast, city) {
 
 //format for the current day 
 var currentDay= moment.unix(current.dt).format("MM/D/YYYY")
-var currentDayIcon= "http://openweathermap.org/img/wn/"+ current.weather[0].icon  +"@2x.png"
+var currentDayIcon= "https://openweathermap.org/img/wn/"+ current.weather[0].icon  +"@2x.png"
 
 
 
