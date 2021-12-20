@@ -37,9 +37,11 @@
             <div class="col-3">
               <h3 class="card-header text-uppercase">Search for a city</h3>
               <form id="city-form" class="card-body">
-                <label class="form-label" for="cityName">City Name</label>
-                <input name="cityName" id="cityName" type="text" autofocus="true" class="form-input" />
-                <button type="submit" class="btn">Search</button>
+                <div class="form-group">
+                  <label class="form-label" for="cityName">City Name</label>
+                  <input name="cityName" id="cityName" type="text" autofocus="true" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-block btn-primary">Search</button>
               </form>
               <div id="history"> </div>
             </div>

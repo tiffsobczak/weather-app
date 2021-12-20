@@ -32,7 +32,7 @@ var formSubmitHandler = function(event) {
 
 //lat and lon for city searched
 var getCityCoordinates = function(city) {
-    var apiUrl= 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=d8a50e839877cad08e505ca47a0dd3aa'
+    var apiUrl= 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=6fe64c1e1151c44b37d2c3c0125e9f74'
     fetch (apiUrl)
     .then(function(response) {
         if(response.ok) {
@@ -59,7 +59,7 @@ var loadHistory=function(){
         historyButtonEl.classList.add("btn-block")
         historyButtonEl.classList.add("btn-secondary")
         historyButtonEl.innerText=item
-        historyButtonEl.setAttribute ("onclick", "getCityCoordinates('" + item + ")")
+        historyButtonEl.setAttribute ("onclick", "getCityCoordinates('" + item + "')")
 
         historyEl.appendChild(historyButtonEl)
     }
@@ -69,7 +69,7 @@ var loadHistory=function(){
 //passing lat and lon of searched city to get the conditions
 var getCityConditions = function (latitute, longitude, city) {
     //format the weather api url
-    var apiUrl= 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitute + '&lon=' + longitude + '&appid=d8a50e839877cad08e505ca47a0dd3aa&exlude=hourly,daily,alerts&units=imperial';
+    var apiUrl= 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitute + '&lon=' + longitude + '&appid=6fe64c1e1151c44b37d2c3c0125e9f74&exlude=hourly,daily,alerts&units=imperial';
 
     //make a request to url
     fetch (apiUrl)
@@ -93,14 +93,14 @@ var displayConditions = function(current, forecast, city) {
     
     console.log(current, forecast)
 //format for UV conditions
-    let currentUviColor = 'green';
+    let uviColorClass= 'badge-success';
 
     if (current.uvi > 2) {
-        currentUviColor = 'yellow';
+        uviColorClass = 'badge-warning';
     }
 
     if (current.uvi > 5) {
-        currentUviColor = 'red';
+        uviColorClass = 'badge-danger';
     }
 
     forecastEl.innerHTML=""
@@ -110,15 +110,17 @@ var displayConditions = function(current, forecast, city) {
         const dayEl=document.createElement('div')
         var date=moment.unix(day.dt).format("MM/D/YYYY")
         var forecastIcon= "https://openweathermap.org/img/wn/" + forecast[i].weather[0].icon +"@2x.png"
-
+        dayEl.classList.add("card")
+        dayEl.classList.add("bg-dark")
+        dayEl.classList.add("text-white")
+        dayEl.classList.add("weather-card")
         dayEl.innerHTML = `
-        <div class="">
-            <div> ${date}</div>
-            <img src="${forecastIcon}"/>
-            <div>Temp: ${forecast[i].temp.day}°F</div>
-            <div>Wind:${forecast[i].wind_speed}MPH </div>
-            <div>Humidity: ${forecast[i].humidity}
-        </div>
+    
+        <div> ${date}</div>
+        <img src="${forecastIcon}"/>
+        <div>Temp: ${forecast[i].temp.day}°F</div>
+        <div>Wind:${forecast[i].wind_speed}MPH </div>
+        <div>Humidity: ${forecast[i].humidity}</div>
         `
 
         forecastEl.appendChild(dayEl);
@@ -139,7 +141,7 @@ var currentDayIcon= "https://openweathermap.org/img/wn/"+ current.weather[0].ico
         <div>Temperature: ${current.temp}°F </div>
         <div>Wind: ${current.wind_speed} MPH </div>
         <div>Humidity: ${current.humidity}%</div>
-        <div style="background-color: ${currentUviColor}">UV Index: ${current.uvi}</div>
+        <div>UV Index: <span class="badge ${uviColorClass}"> ${current.uvi}</span></div>
         
     </div>
     `
