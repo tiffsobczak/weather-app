@@ -12,6 +12,15 @@ var formSubmitHandler = function(event) {
 
     if (cityName) {
         getCityCoordinates(cityName)
+        var storedHistory=window.localStorage.getItem("history")
+            var history=[]
+            if (storedHistory !==null){
+                history=JSON.parse(storedHistory)
+            }
+            history.push(cityName)
+            window.localStorage.setItem("history", JSON.stringify(history))
+
+            loadHistory();
     
         //clear old content
         currentCondEl.textContent='';
@@ -30,8 +39,31 @@ var getCityCoordinates = function(city) {
             response.json().then(function(data) {
                 getCityConditions (data[0].lat, data[0].lon, city)
             })
+        
         }
     })
+}
+
+var loadHistory=function(){
+    var historyEl=document.getElementById("history")
+    historyEl.innerHTML=""
+    var storedHistory=window.localStorage.getItem("history")
+    var history=[]
+    if (storedHistory !==null){
+        history=JSON.parse(storedHistory)
+    }
+    console.log(history)
+    for (var item of history)  {
+        const historyButtonEl=document.createElement("button")
+        historyButtonEl.classList.add("btn")
+        historyButtonEl.classList.add("btn-block")
+        historyButtonEl.classList.add("btn-secondary")
+        historyButtonEl.innerText=item
+        historyButtonEl.setAttribute ("onclick", "getCityCoordinates('" + item + ")")
+
+        historyEl.appendChild(historyButtonEl)
+    }
+
 }
 
 //passing lat and lon of searched city to get the conditions
@@ -116,3 +148,4 @@ var currentDayIcon= "http://openweathermap.org/img/wn/"+ current.weather[0].icon
 //add event listeners to forms
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
+loadHistory();

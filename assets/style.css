@@ -1,0 +1,7 @@
+.app-title{
+    color: white;
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(72,72,170,1) 51%, rgba(2,0,36,1) 100%);
+    padding: 10px;
+    text-align: center;
+}
