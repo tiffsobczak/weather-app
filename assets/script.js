@@ -32,7 +32,7 @@ var formSubmitHandler = function(event) {
 
 //lat and lon for city searched
 var getCityCoordinates = function(city) {
-    var apiUrl= 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=d8a50e839877cad08e505ca47a0dd3aa'
+    var apiUrl= 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=d8a50e839877cad08e505ca47a0dd3aa'
     fetch (apiUrl)
     .then(function(response) {
         if(response.ok) {
