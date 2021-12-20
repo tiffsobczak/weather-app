@@ -1,6 +1,7 @@
 var cityFormEl=document.querySelector('#city-form');
 var nameInputEl = document.querySelector("#cityName");
 var currentCondEl = document.querySelector("#current-conditions");
+var forecastEl= document.querySelector("#fiveday");
 
 var formSubmitHandler = function(event) {
     //prevent page from refresshing
@@ -70,24 +71,46 @@ var displayConditions = function(current, forecast, city) {
         currentUviColor = 'red';
     }
 
+    forecastEl.innerHTML=""
+    //loop over forecast
+    for (var i=0; i < 5; i++) {
+        const day = forecast[i];
+        const dayEl=document.createElement('div')
+        var date=moment.unix(day.dt).format("MM/D/YYYY")
+        var forecastIcon= "http://openweathermap.org/img/wn/" + forecast[i].weather[0].icon +"@2x.png"
+
+        dayEl.innerHTML = `
+        <div class="">
+            <div> ${date}</div>
+            <img src="${forecastIcon}"/>
+            <div>Temp: ${forecast[i].temp.day}°F</div>
+            <div>Wind:${forecast[i].wind_speed}MPH </div>
+            <div>Humidity: ${forecast[i].humidity}
+        </div>
+        `
+
+        forecastEl.appendChild(dayEl);
+    }
+
+
 //format for the current day 
 var currentDay= moment.unix(current.dt).format("MM/D/YYYY")
 var currentDayIcon= "http://openweathermap.org/img/wn/"+ current.weather[0].icon  +"@2x.png"
+
+
 
 
     currentCondEl.innerHTML=`
     <div class="">
         <div> ${city} ${currentDay}</div>
         <img src="${currentDayIcon}" />
-        <div>Temperature: ${current.temp}</div>
-        <div>Wind: ${current.wind_speed}</div>
-        <div>Humidity: ${current.humidity}</div>
+        <div>Temperature: ${current.temp}°F </div>
+        <div>Wind: ${current.wind_speed} MPH </div>
+        <div>Humidity: ${current.humidity}%</div>
         <div style="background-color: ${currentUviColor}">UV Index: ${current.uvi}</div>
         
     </div>
     `
-    
-
 }
 
 //add event listeners to forms
