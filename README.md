@@ -16,3 +16,4 @@ To show the weather outlook for a searched city
 https://tiffsobczak.github.io/weather-app/
 
 ## Screenshot
+![Weather App Screenshot](./weather-app.png)
